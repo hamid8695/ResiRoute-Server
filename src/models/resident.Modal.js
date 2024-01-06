@@ -37,11 +37,15 @@ const ResidentSchema = new mongoose.Schema({
         type: String,
         default: null
     },
-    numberOfRooms:{
+    price: {
         type: Number,
         default: 0
     },
-    price_range: {
+    price_type:{
+        type: String,
+        default: null
+    },
+    resident_type:{
         type: String,
         default: null
     },
@@ -57,14 +61,22 @@ const ResidentSchema = new mongoose.Schema({
         type: String,
         default: null
     },
-    contact_person: {
-        type: String,
-        default: null
-    },
     contact_number: {
         type: String,
         default: null
-    }
+    },
+    email: {
+        type: String,
+        default: null
+    },
+    is_active: {
+       type: Boolean,
+       default: true
+    },
+    is_banned: {
+       type: Boolean,
+       default: false
+    },
 
 },{timestamps: true})
 

@@ -6,9 +6,10 @@ const app = express();
 const userRouter = require('./routers/user.Route');
 const residentRouter = require('./routers/resident.Route');
 const houseRouter = require('./routers/house.Route');
+const reviewRouter = require('./routers/review.Route');
+const bookingRouter = require('./routers/booking.Route');
 const helmet = require("helmet");
 const cors = require("cors");
-
 app.use(cors({
     origin: 'http://localhost:5173'
 }));
@@ -19,9 +20,13 @@ app.use(morgan("dev"))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
 
+
+
 app.use('/api/house',houseRouter)
 app.use('/api/user',userRouter)
 app.use('/api/resident',residentRouter)
+app.use('/api/review',reviewRouter)
+app.use('/api/booking',bookingRouter)
 app.get('/test',(req,res)=>{
     res.send("Server is running")
 })
