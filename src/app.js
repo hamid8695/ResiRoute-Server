@@ -4,6 +4,7 @@ const createError = require('http-errors')
 const bodyParser = require('body-parser')
 const app = express();
 const userRouter = require('./routers/user.Route');
+const adminRouter = require('./routers/admin.Route');
 const residentRouter = require('./routers/resident.Route');
 const houseRouter = require('./routers/house.Route');
 const reviewRouter = require('./routers/review.Route');
@@ -24,6 +25,7 @@ app.use(bodyParser.urlencoded({extended: true}))
 
 app.use('/api/house',houseRouter)
 app.use('/api/user',userRouter)
+app.use('/api/admin',adminRouter)
 app.use('/api/resident',residentRouter)
 app.use('/api/review',reviewRouter)
 app.use('/api/booking',bookingRouter)
