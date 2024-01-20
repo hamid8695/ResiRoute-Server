@@ -76,3 +76,24 @@ module.exports.getAllResidentCreatedByHost = async (req, res, next) => {
         next(error)
     }
 }
+
+
+module.exports.updateResidentPriceByHost = async(req,res,next)=>{
+    try {
+        
+        const resident_id = req.body.resident_id;
+        const price = req.body.price;
+        await Resident.updateOne({
+            _id: resident_id
+        },{
+            $set: {
+                price: price
+            }
+        })
+        res.json({
+            message: "Price Updated Successfully!"
+        })
+    } catch (error) {
+        next(error);
+    }
+}

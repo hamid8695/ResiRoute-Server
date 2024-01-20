@@ -6,5 +6,6 @@ router.get("/all",residentController.getAllResident)
 router.get("/single/:id",residentController.getAResident)
 router.post("/get-resident-by-host",residentController.getAllResidentCreatedByHost)
 router.get("/get-resident-by-search",residentController.getResidentBySearch)
+router.post("/update-price",residentController.updateResidentPriceByHost)
 
 module.exports = router;
