@@ -2,8 +2,9 @@ const mongoose = require("mongoose");
 
 const HotelBookingSchema = new mongoose.Schema({
     hotel_id: {
-        type: String,
-        default: null
+        type: mongoose.Types.ObjectId,
+        ref: "Resident",
+        default: '00000000000000'
     },
     price: {
         type: String,
@@ -14,8 +15,8 @@ const HotelBookingSchema = new mongoose.Schema({
         default: false
     },
     tranjectionId: {
-       type: String,
-       default: '00000000000000'
+        type: String,
+        default: '00000000000000'
     },
     number_of_member: {
         type: String,
@@ -24,6 +25,10 @@ const HotelBookingSchema = new mongoose.Schema({
     guest_name: {
         type: String,
         default: null
+    },
+    guest_id: {
+        type: String,
+        default: '00000000000000'
     },
     contact: {
         type: String,
@@ -38,9 +43,9 @@ const HotelBookingSchema = new mongoose.Schema({
         default: 'DD-MM-YYYY'
     },
 
-},{timestamps: true})
+}, { timestamps: true })
 
-module.exports=mongoose.model("HotelBooking",HotelBookingSchema)
+module.exports = mongoose.model("HotelBooking", HotelBookingSchema)
 
 
 

@@ -1,21 +1,20 @@
 const BookingModel = require("../models/booking.Model");
 const SSLCommerzPayment = require('sslcommerz-lts')
 const { ObjectId } = require('mongodb');
-
+const Resident = require("../models/resident.Modal");
 
 const store_id = 'resir65901b469fdd2'
 const store_passwd = 'resir65901b469fdd2@ssl'
 const is_live = false //true for live, false for sandbox
 
 
-const tran_id = new ObjectId().toString()
+const tran_id = new ObjectId().toString();
+
 module.exports.hotelBookingPayment = async (req, res, next) => {
-    console.log(req.body)
     try {
 
         const newBooking = new BookingModel({ ...req.body, tranjectionId: tran_id });
         const result = await newBooking.save();
-        console.log(req.body.price,req?.body?.guest_name,req?.body?.email,req?.body?.contact)
         if (result) {
             const data = {
                 total_amount: req.body.price,
@@ -47,18 +46,16 @@ module.exports.hotelBookingPayment = async (req, res, next) => {
                 ship_postcode: 1000,
                 ship_country: 'Bangladesh',
             };
-            console.log('store',store_id, store_passwd, is_live)
+            console.log('store', store_id, store_passwd, is_live)
             const sslcz = new SSLCommerzPayment(store_id, store_passwd, is_live)
             sslcz.init(data).then(apiResponse => {
-               
+
                 // Redirect the user to payment gateway
                 let GatewayPageURL = apiResponse.GatewayPageURL
                 console.log('Redirecting to: ', GatewayPageURL)
                 res.send({ url: GatewayPageURL })
             });
         }
-
-
     } catch (error) {
         next(error)
     }
@@ -67,12 +64,12 @@ module.exports.hotelBookingPayment = async (req, res, next) => {
 module.exports.PaymentSuccess = async (req, res, next) => {
     try {
         const { id } = req.params;
-        const result =await BookingModel.updateOne({ tranjectionId: id }, {
+        const result = await BookingModel.updateOne({ tranjectionId: id }, {
             $set: {
                 payment_status: true
             }
         })
-        if(result?.modifiedCount>0){
+        if (result?.modifiedCount > 0) {
             res.redirect(`http://localhost:5173/payment-success/${id}`)
         }
     } catch (error) {
@@ -98,6 +95,8 @@ module.exports.bookingListByHost = async (req, res, next) => {
         const result = await BookingModel.find({
             hotel_id: hotel_id
         })
+
+
         console.log('result is', result)
         res.status(200).json({
             message: 'success',
@@ -105,5 +104,25 @@ module.exports.bookingListByHost = async (req, res, next) => {
         })
     } catch (error) {
         next(error)
+    }
+}
+
+
+module.exports.bookingInfoByCustomer = async (req, res, next) => {
+    try {
+        const guest_id = req.body.guest_id;
+
+        const result = await BookingModel.find({
+            guest_id: guest_id
+        }).populate('hotel_id','resident_name')
+        
+        console.log(result)
+        res.status(200).json({
+            message: 'success',
+            data: result
+        })
+    } catch (error) {
+        console.log(error)
+        next(error);
     }
 }
