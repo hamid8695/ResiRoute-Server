@@ -29,8 +29,8 @@ app.use('/api/admin',adminRouter)
 app.use('/api/resident',residentRouter)
 app.use('/api/review',reviewRouter)
 app.use('/api/booking',bookingRouter)
-app.get('/test',(req,res)=>{
-    res.send("Server is running")
+app.get('/',(req,res)=>{
+    res.send("ResiRoute Server is running")
 })
 
 // client error handling
