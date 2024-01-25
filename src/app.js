@@ -17,6 +17,7 @@ const corsOptions ={
     optionSuccessStatus:200
 }
 app.use(cors(corsOptions));
+
 const userRouter = require('./routers/user.Route');
 const adminRouter = require('./routers/admin.Route');
 const residentRouter = require('./routers/resident.Route');
