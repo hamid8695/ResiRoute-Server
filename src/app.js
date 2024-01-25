@@ -6,7 +6,9 @@ const app = express();
 const helmet = require("helmet");
 const cors = require("cors");
 
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:5173'
+}));
 
 const userRouter = require('./routers/user.Route');
 const adminRouter = require('./routers/admin.Route');
@@ -14,12 +16,6 @@ const residentRouter = require('./routers/resident.Route');
 const houseRouter = require('./routers/house.Route');
 const reviewRouter = require('./routers/review.Route');
 const bookingRouter = require('./routers/booking.Route');
-
-
-
-// app.use(cors({
-//     origin: 'http://localhost:5173'
-// }));
 
 
 //  middleware
