@@ -3,14 +3,17 @@ const morgan = require('morgan')
 const createError = require('http-errors')
 const bodyParser = require('body-parser')
 const app = express();
+const helmet = require("helmet");
+const cors = require("cors");
+
+
 const userRouter = require('./routers/user.Route');
 const adminRouter = require('./routers/admin.Route');
 const residentRouter = require('./routers/resident.Route');
 const houseRouter = require('./routers/house.Route');
 const reviewRouter = require('./routers/review.Route');
 const bookingRouter = require('./routers/booking.Route');
-const helmet = require("helmet");
-const cors = require("cors");
+
 
 
 app.use(cors({
