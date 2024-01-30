@@ -4,19 +4,22 @@ const createError = require('http-errors')
 const bodyParser = require('body-parser')
 const app = express();
 const helmet = require("helmet");
-// const cors = require("cors");
+const cors = require("cors");
 
-// app.use(cors({
-//     origin: 'http://localhost:5173'
-// }));
 
-const cors = require('cors');
-const corsOptions ={
-    origin:'http://localhost:5173', 
-    credentials:false,            //access-control-allow-credentials:true
-    optionSuccessStatus:200
-}
-app.use(cors(corsOptions));
+
+//  middlewareeee
+app.use(express.json());
+app.use(helmet());
+app.use(morgan("dev"))
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended: true}))
+app.use(cors({
+    origin: ['http://localhost:5173'],
+    credentials: true,
+}));
+
+
 
 const userRouter = require('./routers/user.Route');
 const adminRouter = require('./routers/admin.Route');
@@ -26,12 +29,6 @@ const reviewRouter = require('./routers/review.Route');
 const bookingRouter = require('./routers/booking.Route');
 
 
-//  middlewareeee
-app.use(express.json());
-app.use(helmet());
-app.use(morgan("dev"))
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({extended: true}))
 
 
 
