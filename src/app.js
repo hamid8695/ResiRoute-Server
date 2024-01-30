@@ -2,7 +2,7 @@ const express = require("express");
 const morgan = require('morgan')
 const createError = require('http-errors')
 const bodyParser = require('body-parser')
-
+const { connectDb } = require("./config/db");
 
 // all routes
 const userRouter = require('./routers/user.Route');
@@ -24,6 +24,8 @@ app.use(helmet());
 app.use(morgan("dev"))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
+
+connectDb()
 app.use(cors());
 // app.use(cors({
 //     origin: ['http://localhost:5173'],
