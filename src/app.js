@@ -20,7 +20,7 @@ app.use(cors({
 }));
 
 
-
+// all routes
 const userRouter = require('./routers/user.Route');
 const adminRouter = require('./routers/admin.Route');
 const residentRouter = require('./routers/resident.Route');
