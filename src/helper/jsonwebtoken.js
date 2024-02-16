@@ -5,8 +5,9 @@ exports.tokenGenerate =(userInfo)=>{
     const payload = {
         email: userInfo.email
     }
+    console.log('from token',payload)
     const token = jwt.sign(payload,process.env.ACCESS_TOKEN_SECRET,{expiresIn: '7days' })
-   
+   console.log('token',token)
     return token;
 }
 

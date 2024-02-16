@@ -10,10 +10,11 @@ module.exports.createAuser = async (req, res, next) => {
         const newUser = new User(req.body);
         const user = await newUser.save();
         res.status(200).json({
-            message: "success",
+            message: "Successfully Account Created!",
             result: user
         })
     } catch (error) {
+        console.log("error",error)
         next(error)
     }
 }
@@ -33,6 +34,7 @@ module.exports.loginAuser = async (req, res, next) => {
                 if (!validPassword) {
                     res.status(403).send({ message: "Wrong Password!" });
                 } else {
+                    console.log('hi')
                     const token = tokenGenerate(user);
                     res.status(200).json({
                         message: "user logged in successfully",
@@ -44,6 +46,7 @@ module.exports.loginAuser = async (req, res, next) => {
             }
         }
     } catch (error) {
+        console.log("err",err)
         next(error)
     }
 }
@@ -137,6 +140,29 @@ module.exports.userBulkDelete = async (req, res, next) => {
         })
     } catch (error) {
         next(error)
+    }
+}
+
+
+module.exports.deleteGuestUser = async(req,res,next)=>{
+    try {
+        await User.deleteOne({
+            _id: req.params.id
+        })
+        res.send("ok")
+    } catch (error) {
+        next(error);
+    }
+}
+
+module.exports.deleteHost = async(req,res,next)=>{
+    try {
+        await User.deleteOne({
+            _id: req.params.id
+        })
+        res.send("ok")
+    } catch (error) {
+        next(error);
     }
 }
 

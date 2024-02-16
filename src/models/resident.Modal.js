@@ -71,7 +71,7 @@ const ResidentSchema = new mongoose.Schema({
     },
     is_active: {
        type: Boolean,
-       default: true
+       default: false
     },
     is_banned: {
        type: Boolean,

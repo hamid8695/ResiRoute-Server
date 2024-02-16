@@ -8,4 +8,7 @@ router.post("/get-resident-by-host",residentController.getAllResidentCreatedByHo
 router.get("/get-resident-by-search",residentController.getResidentBySearch)
 router.post("/update-price",residentController.updateResidentPriceByHost)
 
+router.post('/delete-hotel/:id', residentController.deleteHotelInfo)
+router.post('/change-status/:id', residentController.changeHotelStatus)
+
 module.exports = router;

@@ -15,7 +15,6 @@ module.exports.createReview =async(req,res,next)=>{
 
 module.exports.getReviewsByHotel = async(req,res,next)=>{
     try {
-        console.log('reqqqqqqqq',req.body)
        const hostId = req.body.hostId;
     //    console.log('hotel id',hostId)
        const result = await ReviewModel.find({

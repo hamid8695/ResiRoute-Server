@@ -97,3 +97,28 @@ module.exports.updateResidentPriceByHost = async(req,res,next)=>{
         next(error);
     }
 }
+
+module.exports.deleteHotelInfo = async(req,res,next)=>{
+    try {
+        await Resident.deleteOne({
+            _id: req.params.id
+        })
+        res.send("ok")
+    } catch (error) {
+        next(error);
+    }
+}
+
+
+module.exports.changeHotelStatus = async(req,res,next)=>{
+    try {
+      await Resident.updateOne({
+        _id: req.params.id
+      }, {
+        $set: req.body
+      })  
+      res.send("ok")
+    } catch (error) {
+        next(error);
+    }
+}
