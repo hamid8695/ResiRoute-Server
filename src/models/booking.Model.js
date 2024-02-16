@@ -42,6 +42,10 @@ const HotelBookingSchema = new mongoose.Schema({
         type: String,
         default: 'DD-MM-YYYY'
     },
+    date_of_checkout: {
+        type: String,
+        default: 'DD-MM-YYYY' 
+    }
 
 }, { timestamps: true })
 

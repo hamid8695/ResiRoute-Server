@@ -78,6 +78,7 @@ module.exports.PaymentSuccess = async (req, res, next) => {
 }
 module.exports.createGuestBooking = async (req, res, next) => {
     try {
+        console.log(req.body)
         const newBooking = new BookingModel(req.body);
         const result = await newBooking.save();
         res.status(200).json({
