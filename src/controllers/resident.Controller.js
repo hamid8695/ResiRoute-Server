@@ -14,7 +14,8 @@ module.exports.createResident = async (req, res, next) => {
 
 module.exports.getAllResident = async (req, res, next) => {
     try {
-        const result = await Resident.find({});
+        console.log(req.body);
+        const result = await Resident.find(req.body);
         res.status(200).json({
             message: 'success',
             data: result
